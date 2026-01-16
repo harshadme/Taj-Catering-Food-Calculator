@@ -1,29 +1,31 @@
 import { create } from "zustand";
 
-type MenuState = {
-  selectedDishes: string[];
-  quantities: Record<string, number>;
-  toggleDish: (dishId: string) => void;
-  setQuantity: (dishId: string, qty: number) => void;
+type MenuStore = {
+  selectedDishes: number[];
+  quantities: Record<number, number>;
+  toggleDish: (dishId: number) => void;
+  setQuantity: (dishId: number, qty: number) => void;
 };
 
-export const useMenuStore = create<MenuState>((set, get) => ({
+export const useMenuStore = create<MenuStore>((set) => ({
   selectedDishes: [],
   quantities: {},
 
-  toggleDish: (dishId) => {
-    const { selectedDishes } = get();
-    const exists = selectedDishes.includes(dishId);
+  toggleDish: (dishId: number) =>
+    set((state) => {
+      const exists = state.selectedDishes.includes(dishId);
+      return {
+        selectedDishes: exists
+          ? state.selectedDishes.filter((d) => d !== dishId)
+          : [...state.selectedDishes, dishId],
+      };
+    }),
 
-    set({
-      selectedDishes: exists
-        ? selectedDishes.filter((d) => d !== dishId)
-        : [...selectedDishes, dishId],
-    });
-  },
-
-  setQuantity: (dishId, qty) =>
+  setQuantity: (dishId: number, qty: number) =>
     set((state) => ({
-      quantities: { ...state.quantities, [dishId]: qty },
+      quantities: {
+        ...state.quantities,
+        [dishId]: qty,
+      },
     })),
 }));
