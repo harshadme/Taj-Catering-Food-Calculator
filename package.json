@@ -8,8 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^16.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "16.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17",
+    "@tailwindcss/postcss": "^3.4.1"
   }
 }
