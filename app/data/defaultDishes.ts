@@ -1,3 +1,3 @@
-import { dishes } from "./dishes";
+import { DISHES } from "./dishes";
 
-export const defaultDishes = dishes;
+export const defaultDishes = DISHES;
